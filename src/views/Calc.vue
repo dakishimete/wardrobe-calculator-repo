@@ -87,7 +87,7 @@ export default {
     }
 
     .block {
-        &-header {
+        &__header {
             font-size: 1.5em;
             font-weight: 700;
             margin-bottom: 20px;
@@ -103,5 +103,21 @@ export default {
     .el-tooltip__popper {
         line-height: 1.5 !important;
         font-size: 14px !important;
+    }
+
+    .el-input__inner {
+        padding: 0 5px;
+    }
+
+    .input--error {
+        .el-input__inner {
+            border: 1px solid red !important;
+        }
+    }
+
+    .input--warning{
+        .el-input__inner {
+            border: 1px solid orange !important;
+        }
     }
 </style>
