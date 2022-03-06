@@ -64,8 +64,22 @@ export default {
         },
         GET_SUMMARY: (state) => {
             return state.summary;
+        },
+        ARE_ALL_PARAMS_SET: (state) => {
+            let array = [];
+            for (let param in state.params){
+                state.params[param].input > 0 ? array.push(true): array.push(false);
+            }
+            return array.every(Boolean);
+        },
+        GET_PARAM_INPUT: (state) => (param) => {
+            return state.params[param].input;
+        },
+        GET_PARAM_DEFAULTS_ARRAY: (state) => (param) => {
+            let arr = state.params[param].defaultsArray;
+            arr.sort( (a, b) => a - b );
+            return arr;
         }
-
     },
 
     actions: {}
