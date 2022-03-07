@@ -120,4 +120,26 @@ export default {
             border: 1px solid orange !important;
         }
     }
+
+    .el-checkbox__input{
+        vertical-align: baseline !important;
+    }
+
+    .el-checkbox__label {
+        font-size: 16px !important;
+        padding-left: 7px !important;
+    }
+
+    .el-input-number--small {
+        width: 80px !important;
+    }
+
+    .el-checkbox__input.is-checked+.el-checkbox__label {
+        color: red !important;
+    }
+
+    .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+        background-color: red !important;
+        border-color: red !important;
+    }
 </style>
