@@ -142,4 +142,8 @@ export default {
         background-color: red !important;
         border-color: red !important;
     }
+
+    .el-input-number.is-controls-right .el-input__inner {
+        padding-right: 48px !important;
+    }
 </style>

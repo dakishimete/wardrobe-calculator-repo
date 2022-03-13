@@ -2,7 +2,7 @@ export default {
     namespaced: true,
 
     state: {
-        doorsType: 'r',
+        doorsType: 'k',
         r: {
             params: {
                 material: [
@@ -22,8 +22,8 @@ export default {
                 count: 2,
                 doorWidth: 0,
                 dels: {
-                    hor: { name: 'Делитель горизонтальный', count: 0, price: 300 },
-                    vert: { name: 'Делитель вертикальный', count: 0, price: 600 }
+                    hor: { id: 'hor', name: 'Делитель горизонтальный', count: 0, price: 300, title: 'Горизонтальные', max: 10 },
+                    vert: { id: 'vert', name: 'Делитель вертикальный', count: 0, price: 600, title: 'Вертикальные', max: 4 }
                 },
                 material: [
                     { id: 'k001', name: 'ДСП Российское', count: 0, priceOnSuare: 2000},
@@ -60,7 +60,19 @@ export default {
         SET_SUMMARY (state, payload){
             state[payload.type].summary.sum = payload.sum;
             state[payload.type].summary.stringsArray = payload.stringsArray;
-        }
+        },
+        SET_K_COUNT (state, payload){
+            state.k.params.count = payload;
+        },
+        SET_K_DELS (state, payload){
+            state.k.params.dels[payload.param].count = payload.count; 
+        },
+        SET_K_MATERIAL (state, payload){
+            let object = state.k.params.material.find(item => item.id === payload.id);
+            if(object){
+                object.count = payload.count;
+            }  
+        },
     },
 
     getters: {
@@ -69,6 +81,9 @@ export default {
         },
         GET_R_DOORS_PARAMS: (state) => {
             return state.r.params;
+        },
+        GET_K_DOORS_PARAMS: (state) => {
+            return state.k.params;
         },
 
     },
