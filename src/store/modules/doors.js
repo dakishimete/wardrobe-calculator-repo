@@ -2,7 +2,7 @@ export default {
     namespaced: true,
 
     state: {
-        doorsType: 'k',
+        doorsType: 'r',
         r: {
             params: {
                 material: [
@@ -41,10 +41,6 @@ export default {
                 stringsArray: []
             }
         },
-        summary: {
-            sum: 0,
-            stringsArray: []
-        }
     },
 
     mutations: {
@@ -85,6 +81,10 @@ export default {
         GET_K_DOORS_PARAMS: (state) => {
             return state.k.params;
         },
+        GET_SUMMARY: (state) => {
+            let type = state.doorsType;
+            return state[type].summary;
+        }
 
     },
 

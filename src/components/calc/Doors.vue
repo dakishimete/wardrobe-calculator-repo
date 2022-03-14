@@ -17,20 +17,18 @@
             <div v-show="isContentAllowedToView">
                 
                 <div class="doors__type">
-                    <el-radio v-model="doorsType" label="r" >Распашные</el-radio>
-                    <el-radio v-model="doorsType" label="k" >Купе</el-radio>
+                    <el-radio v-model="doorsType" label="r">Распашные</el-radio>
+                    <el-radio v-model="doorsType" label="k">Купе</el-radio>
                 </div>
 
                 <div>
 
                     <div v-if="doorsType === 'r'">
                         <DoorsRasp/>
-                        <!-- doors rasp -->
                     </div>
 
                     <div v-if="doorsType === 'k'">
                         <DoorsKupe/>
-                        <!-- doors kupe -->
                     </div>
 
                 </div>
@@ -56,14 +54,14 @@ export default {
     },
     computed: {
         ...mapGetters('doors',[
-            'GET_DOORS_TYPE', //y
-            'doorsAllSummary' //n
+            'GET_DOORS_TYPE',
+            'GET_SUMMARY'
         ]),
         ...mapGetters('params',[
-            'ARE_ALL_PARAMS_SET', //y
+            'ARE_ALL_PARAMS_SET',
         ]),
         ...mapGetters('inner',[
-            'GET_INNER_FULL_DATA', //y
+            'GET_INNER_FULL_DATA',
         ]),
         doorsType: {
             get(){
@@ -74,24 +72,24 @@ export default {
             }
         },
         sumString: function() {
-            //todo
-            return 'str';
+            if(this.GET_SUMMARY.sum > 0){
+                let str = this.GET_SUMMARY.stringsArray.join('<br/>');
+                return str;
+            }
+            return 'Двери шкафа не выбраны';
         },
         sumNumber: function() {
-            //todo
-            return 111;
+            return this.GET_SUMMARY.sum;
         },
         isContentAllowedToView: function() {
-            // return this.ARE_ALL_PARAMS_SET && this.GET_INNER_FULL_DATA;
-            return true;
+            return this.ARE_ALL_PARAMS_SET && this.GET_INNER_FULL_DATA;
+            // return true;
         }
-
     },
     methods: {
         ...mapMutations('doors', [
-            'SET_DOORS_TYPE' //y
+            'SET_DOORS_TYPE'
         ]),
-
     },
     watch: {
 
@@ -100,11 +98,16 @@ export default {
         DoorsRasp, DoorsKupe
     },
     beforeMount(){
-
     }
 }
 </script>
 
 <style lang="scss">
-
+    .doors {
+        &__type {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ebebeb;
+        }
+    }
 </style>

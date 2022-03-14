@@ -146,4 +146,13 @@ export default {
     .el-input-number.is-controls-right .el-input__inner {
         padding-right: 48px !important;
     }
+
+    
+        // .el-radio__input {
+        //     vertical-align: baseline;
+        // }
+
+        // .el-radio__label {
+        //     font-size: 16px;
+        // }
 </style>
