@@ -127,7 +127,7 @@ export default {
             this.HANDLE_SUM(payload);
         },
     },
-    mounted(){
+    beforeMount(){
         this.getAllParamsFromVuex();
     }
 }

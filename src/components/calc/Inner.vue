@@ -153,7 +153,7 @@ export default {
     },
     watch: {
     },
-    mounted(){
+    beforeMount(){
         this.getInnerNameFromVuex();
     }
 }
