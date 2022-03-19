@@ -155,4 +155,29 @@ export default {
         // .el-radio__label {
         //     font-size: 16px;
         // }
+
+
+    .el-collapse, .el-collapse-item__wrap, .el-collapse-item__header{
+        border: none !important;
+        // font-size: 16px;
+    }
+
+    .el-collapse-item__header{
+        font-size: 16px !important;
+        line-height: 30px !important;
+        height: 30px !important;
+    }
+
+    .el-collapse-item__content{
+        padding-bottom: 0 !important;
+        border-top: 1px solid #eeeeee;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    .el-collapse{
+        border: 1px solid #eeeeee !important;
+        border-radius: 4px;
+        padding: 10px;
+    }
 </style>
