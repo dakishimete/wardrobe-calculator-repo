@@ -79,7 +79,16 @@ export default {
             let arr = state.params[param].defaultsArray;
             arr.sort( (a, b) => a - b );
             return arr;
-        }
+        },
+        IS_AT_LEAST_ONE_PARAM_IS_MODIFIED: (state) => {
+            let array = [];
+            for (let param in state.params){
+                if(state.params[param].modified.status){
+                    return true; //end cycle after first true result
+                }
+            }
+            return false; //no true result = all params are not modified
+          }
     },
 
     actions: {}

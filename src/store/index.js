@@ -7,6 +7,7 @@ import params from './modules/params';
 import inner from './modules/inner';
 import doors from './modules/doors';
 import additional from './modules/additional';
+import time from './modules/time';
 
 
 Vue.use(Vuex)
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     params,
     inner,
     doors,
-    additional
+    additional,
+    time
   }
 })
