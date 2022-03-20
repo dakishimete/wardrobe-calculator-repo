@@ -17,7 +17,17 @@
                     :class="{   'input--error': isInputParamEmpty(param.name) || isInputParamMoreThanMax(param.name), 
                                 'input--warning': isInputParamModified(param.name)
                             }">
-                    <el-input v-model="param.input" type="number" size="small" @input="handleInputParam(param.name)" :max="maxDefaultParam(param.name)"></el-input>
+                    <el-input   v-model="param.input" 
+                                type="number" size="small" 
+                                @input="handleInputParam(param.name)" 
+                                min="0"
+                                step="1"
+                                :max="maxDefaultParam(param.name)"
+                                onfocus="this.previousValue = this.value"
+                                onkeydown="this.previousValue = this.value"
+                                oninput="validity.valid || (value = this.previousValue)"
+                                >
+                    </el-input>
                 </div>
                 <div class="param__warning">
                     <div v-if="isInputParamEmpty(param.name)" class="param__warning--red">Заполните поле</div> 
@@ -71,7 +81,6 @@ export default {
         sumNumber: function() {
             return this.GET_SUMMARY.sum;
         },
-
     },
     methods: {
         ...mapMutations('params', [
@@ -95,6 +104,7 @@ export default {
         },
         handleInputParam: function(param){
             let value = +this.params[param].input;
+            console.log(value);
             let defaultsArray = this.params[param].defaultsArray;
             this.params[param].modified.status = value > 0 && !defaultsArray.includes(value) && !this.isInputParamMoreThanMax(param);
         
