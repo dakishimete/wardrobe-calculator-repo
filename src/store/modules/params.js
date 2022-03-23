@@ -68,9 +68,11 @@ export default {
         ARE_ALL_PARAMS_SET: (state) => {
             let array = [];
             for (let param in state.params){
-                state.params[param].input > 0 ? array.push(true): array.push(false);
+                if(state.params[param].input == 0) {
+                    return false;
+                }
             }
-            return array.every(Boolean);
+            return true;
         },
         GET_PARAM_INPUT: (state) => (param) => {
             return state.params[param].input;
