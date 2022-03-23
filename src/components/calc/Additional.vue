@@ -78,7 +78,7 @@ export default {
             return 'Нет дополнительных элементов';
         },
         sumNumber: function() {
-            return this.GET_SUMMARY.sum;
+            return this.GET_SUMMARY.sum + this.GET_SUMMARY.assembly;
         }
     },
     methods: {
