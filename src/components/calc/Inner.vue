@@ -130,7 +130,7 @@ export default {
             let assembly = 0;
             let assemblyArray = [];
 
-            if(this.selectedInnerName){
+            if(this.selectedInnerName && this.isContentAllowedToView){
                 let inner = this.GET_INNER_FULL_DATA;
                 sum = sum + inner.price;
                 stringsArray.push('Модель корпуса ' + inner.name + ': ' + inner.price);
@@ -148,10 +148,11 @@ export default {
                 }
             }
         }
-        
-
     },
     watch: {
+        isContentAllowedToView: function(){
+            this.sum();
+        }
     },
     beforeMount(){
         this.getInnerNameFromVuex();

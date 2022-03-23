@@ -83,7 +83,6 @@ export default {
         },
         isContentAllowedToView: function() {
             return this.ARE_ALL_PARAMS_SET && this.GET_INNER_FULL_DATA;
-            // return true;
         }
     },
     methods: {

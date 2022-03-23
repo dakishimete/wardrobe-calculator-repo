@@ -111,20 +111,28 @@ export default {
             return this.additional.elements[elementName].count > 0;
         },
         sum: function() {
-            let top = this.sumTop();
-            let light = this.sumLight();
-            let elements = this.sumElements();
+            let sum = 0;
+            let stringsArray = [];
+            let assembly = 0;
+            let assemblyArray = [];
 
-            let sum = top.sum + light.sum + elements.sum;
+            if(this.isContentAllowedToView){
+                let top = this.sumTop();
+                let light = this.sumLight();
+                let elements = this.sumElements();
 
-            let stringsArray = [...top.stringsArray,
-                                ...light.stringsArray,
-                                ...elements.stringsArray];
+                sum = top.sum + light.sum + elements.sum;
 
-            let assembly =  light.assembly + elements.assembly; 
+                stringsArray = [...top.stringsArray,
+                                    ...light.stringsArray,
+                                    ...elements.stringsArray];
 
-            let assemblyArray =   [...light.assemblyArray,
-                                    ...elements.assemblyArray]; 
+                assembly =  light.assembly + elements.assembly; 
+
+                assemblyArray =   [...light.assemblyArray,
+                                        ...elements.assemblyArray]; 
+            }
+            
 
             let payload = {sum, stringsArray, assembly, assemblyArray};
 
@@ -198,6 +206,9 @@ export default {
                 this.sum();
             },
             deep: true,
+        },
+        isContentAllowedToView: function(after, before) {
+            this.sum();
         }
     },
     beforeMount(){

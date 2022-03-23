@@ -104,7 +104,6 @@ export default {
         },
         handleInputParam: function(param){
             let value = +this.params[param].input;
-            console.log(value);
             let defaultsArray = this.params[param].defaultsArray;
             this.params[param].modified.status = value > 0 && !defaultsArray.includes(value) && !this.isInputParamMoreThanMax(param);
         

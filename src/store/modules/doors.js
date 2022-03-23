@@ -41,6 +41,10 @@ export default {
                 stringsArray: []
             }
         },
+        summary: {
+            sum: 0,
+            stringsArray: []
+        }
     },
 
     mutations: {
@@ -54,8 +58,8 @@ export default {
             }  
         },
         SET_SUMMARY (state, payload){
-            state[payload.type].summary.sum = payload.sum;
-            state[payload.type].summary.stringsArray = payload.stringsArray;
+            state.summary.sum = payload.sum;
+            state.summary.stringsArray = payload.stringsArray;
         },
         SET_K_COUNT (state, payload){
             state.k.params.count = payload;
@@ -82,10 +86,8 @@ export default {
             return state.k.params;
         },
         GET_SUMMARY: (state) => {
-            let type = state.doorsType;
-            return state[type].summary;
-        }
-
+            return state.summary;
+        },
     },
 
     actions: {

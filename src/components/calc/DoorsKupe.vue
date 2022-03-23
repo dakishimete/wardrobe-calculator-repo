@@ -115,6 +115,9 @@ export default {
         isTooManyDoorsSelected: function() {
             let total = this.params.material.reduce((prev,curItem) => prev + curItem.count, 0);
             return total > this.params.count;
+        },
+        isContentAllowedToView: function() {
+            return this.GET_PARAM_INPUT('width') && this.GET_INNER_FULL_DATA;
         }
     },
     methods: {
@@ -157,30 +160,31 @@ export default {
             let sum = 0;
             let stringsArray = [];
 
-            let width = this.GET_PARAM_INPUT('width');
-            let widthOfDoor = +(width / this.params.count / 1000).toFixed(2);
+            if(this.isContentAllowedToView){
+                let width = this.GET_PARAM_INPUT('width');
+                let widthOfDoor = +(width / this.params.count / 1000).toFixed(2);
 
-
-            //dels
-            for(let param in this.params.dels){
-                let del = this.params.dels[param];
-                if(del.count > 0){
-                    let delsSum = del.price * del.count;
-                    sum = sum + delsSum;
-                    let delsStr = del.name + ': ' + del.price + '*' + del.count + ' = ' + delsSum;
-                    stringsArray.push(delsStr);
+                //dels
+                for(let param in this.params.dels){
+                    let del = this.params.dels[param];
+                    if(del.count > 0){
+                        let delsSum = del.price * del.count;
+                        sum = sum + delsSum;
+                        let delsStr = del.name + ': ' + del.price + '*' + del.count + ' = ' + delsSum;
+                        stringsArray.push(delsStr);
+                    }
                 }
-            }
 
-            //material
-            let doors = this.params.material.filter(item => item.count > 0);
-            for(let d in doors){
-                let door = doors[d];
-                let doorSum = door.priceOnSuare * widthOfDoor * door.count;
-                doorSum = Math.round(doorSum);
-                sum = sum + doorSum;
-                let doorStr = door.name + ': ' + door.priceOnSuare + '*' + widthOfDoor + '*' + door.count + ' = ' + doorSum;
-                stringsArray.push(doorStr);
+                //material
+                let doors = this.params.material.filter(item => item.count > 0);
+                for(let d in doors){
+                    let door = doors[d];
+                    let doorSum = door.priceOnSuare * widthOfDoor * door.count;
+                    doorSum = Math.round(doorSum);
+                    sum = sum + doorSum;
+                    let doorStr = door.name + ': ' + door.priceOnSuare + '*' + widthOfDoor + '*' + door.count + ' = ' + doorSum;
+                    stringsArray.push(doorStr);
+                }
             }
 
             //to vuex
@@ -194,9 +198,11 @@ export default {
                 this.sum();
             },
             deep: true,
+        },
+        isContentAllowedToView: function(after, before) {
+            this.sum();
         }
     },
-
     beforeMount(){
         this.getDataFromVuex();
     }

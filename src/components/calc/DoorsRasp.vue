@@ -43,10 +43,13 @@ export default {
     },
     computed: {
         ...mapGetters('inner',[
-            'GET_INNER_FULL_DATA', //y
+            'GET_INNER_FULL_DATA',
         ]),
         ...mapGetters('doors',[
-            'GET_R_DOORS_PARAMS', //y
+            'GET_R_DOORS_PARAMS',
+        ]),
+        ...mapGetters('params',[
+            'GET_PARAM_INPUT' 
         ]),
         doorsCount: function() {
             let inner = this.GET_INNER_FULL_DATA;
@@ -56,6 +59,9 @@ export default {
         isTooManyDoorsSelected: function() {
             let total = this.params.material.reduce((prev,curItem) => prev + curItem.count, 0);
             return total > this.doorsCount;
+        },
+        isContentAllowedToView: function() {
+            return this.GET_PARAM_INPUT('width') && this.GET_INNER_FULL_DATA;
         }
     },
     methods: {
@@ -85,13 +91,15 @@ export default {
             let sum = 0;
             let stringsArray = [];
 
-            let chosenDoors = this.params.material.filter(item => item.count > 0);
+            if(this.isContentAllowedToView){
+                let chosenDoors = this.params.material.filter(item => item.count > 0);
 
-            for(let door of chosenDoors){
-                let sumDoor = door.price * door.count;
-                sum = sum + sumDoor;
-                let str = door.name + ': ' + door.price + '*' + door.count + ' = ' + sumDoor;
-                stringsArray.push(str);
+                for(let door of chosenDoors){
+                    let sumDoor = door.price * door.count;
+                    sum = sum + sumDoor;
+                    let str = door.name + ': ' + door.price + '*' + door.count + ' = ' + sumDoor;
+                    stringsArray.push(str);
+                }
             }
 
             let payload = {type, sum, stringsArray};
@@ -105,9 +113,11 @@ export default {
                 this.sum();
             },
             deep: true,
+        },
+        isContentAllowedToView: function(after, before) {
+            this.sum();
         }
     },
-
     beforeMount(){
         this.getDataFromVuex();
     }

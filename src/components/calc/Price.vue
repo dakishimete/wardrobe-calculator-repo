@@ -47,7 +47,7 @@ export default {
                     params: {},
                     inner: {},
                     doors: {},
-                    changes: {}
+                    additional: {}
                 },
                 results: {
                     sum: 0,
@@ -65,6 +65,7 @@ export default {
     computed: {
         ...mapGetters([
             'params/GET_SUMMARY',
+            'params/ARE_ALL_PARAMS_SET',
             'inner/GET_SUMMARY',
             'doors/GET_SUMMARY',
             'additional/GET_SUMMARY'
@@ -81,8 +82,8 @@ export default {
         checkDoors: function(){
             this.wardrobe.parts.doors = this['doors/GET_SUMMARY'];
         },
-        checkChanges: function(){
-            this.wardrobe.parts.changes = this['additional/GET_SUMMARY'];
+        checkAdditional: function(){
+            this.wardrobe.parts.additional = this['additional/GET_SUMMARY'];
         },
     },
     methods: {
@@ -119,9 +120,9 @@ export default {
     },
     beforeMount(){
         this.checkParams;
-        this.checkChanges;
         this.checkInner;
         this.checkDoors;
+        this.checkAdditional;
     }
 }
 </script>
