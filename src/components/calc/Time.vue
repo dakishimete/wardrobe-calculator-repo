@@ -1,7 +1,7 @@
 <template>
     <div class="block">
         <div class="block__header block-header">
-            <div class="block-header__title">Стоимость</div>
+            <div class="block-header__title">Сроки</div>
             <div class="block-header__sum">
             </div>
         </div>
@@ -13,7 +13,7 @@
                 <el-collapse v-model="spoiler">
                     <el-collapse-item name="more">
                         <template slot="title">
-                            Сроки
+                            Подробнее
                         </template>
                         <div v-for="obj in timeOptionsArrayForSpoiler" :key = "obj.str" 
                             class="time-spoiler__row" 
@@ -43,28 +43,47 @@ export default {
     computed: {
         ...mapGetters([
             'params/IS_AT_LEAST_ONE_PARAM_IS_MODIFIED',
+            'params/ARE_ALL_PARAMS_SET',
+            'inner/GET_INNER_FULL_DATA',
             'doors/GET_DOORS_TYPE', 
             'time/GET_TIME_OPTIONS'
         ]),
+        isContentAllowedToView: function(){
+            return this['params/ARE_ALL_PARAMS_SET'] && this['inner/GET_INNER_FULL_DATA'];
+        },
         timeString: function() {
-            let time = this.daysCount();
-            let word = this.daysWordRusEnding(time);
+            let time = this.timeOptions.default;
+            let param = 'r';
+            let prefix = 'от ';
 
-            return time + ' ' + word;
+            if(this.isContentAllowedToView) {
+                time = this.daysCount();
+                param = 'i';
+                prefix = '';
+            }
+
+            let word = this.daysWordRusEnding(time, param);
+
+            return prefix + time + ' ' + word;
         },
         timeOptionsArrayForSpoiler: function() {
             let timeOptions = [];
 
+            //doors type
             let doors = this.timeOptions.doorsType;
             for (let currentDoorsType in doors){
                 let currentDoorParam = this.timeOptions.doorsType[currentDoorsType];
                 let str = currentDoorParam.name + ': от ' + currentDoorParam.time;
                 let selectedDoorsType = this['doors/GET_DOORS_TYPE'];
-                let status = currentDoorsType === selectedDoorsType;
+                let status = false;
+                if(this.isContentAllowedToView){
+                    status = currentDoorsType === selectedDoorsType;
+                }
                 let timeOption = {str, status}
                 timeOptions.push(timeOption);
             }
 
+            //params modified
             let str = this.timeOptions.paramsModified.name + ': +' + this.timeOptions.paramsModified.time;
             let status = this['params/IS_AT_LEAST_ONE_PARAM_IS_MODIFIED'];
             let timeOption = {str, status}
@@ -74,14 +93,32 @@ export default {
         },
     },
     methods: {
-        daysWordRusEnding: function (value){  
-            let words = ['день', 'дня', 'дней'];
+        daysWordRusEnding: function (value, param){  
+            let words = {
+                i: ['день', 'дня', 'дней'], //именительный падеж
+                r: ['дня', 'дней'] //родительный падеж
+            }
             value = Math.abs(value) % 100; 
             let num = value % 10;
 
-            if(num == 1) return words[0]; 
-            if(num > 1 && num < 5) return words[1];
-            if(value >= 5 && value < 20) return words[2]; 
+            if(param == 'i'){
+                if(value < 10 || value >= 20){
+                    if(num == 1) return words.i[0]; 
+                    if(num > 1 && num < 5) return words.i[1];
+                    return words.i[2]; 
+                }
+
+                if(value >= 10 || value < 20){
+                    return words.i[2]; 
+                }
+
+                return words.i[2];
+            }
+
+            if(param == 'r'){
+                if((value < 10 || value >= 20) && num == 1) return words.r[0];
+                return words.r[1];
+            }
         },
         daysCount: function() {
             let doorsType = this['doors/GET_DOORS_TYPE'];

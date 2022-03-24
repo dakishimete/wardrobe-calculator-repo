@@ -16,7 +16,8 @@ export default {
             paramsModified: {
                 name: 'Упилы по длине/ширине/высоте',
                 time: 3,
-            }
+            },
+            default: 1
         },
     },
 
