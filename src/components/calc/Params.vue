@@ -158,65 +158,65 @@ export default {
                 margin-right: 0;
             }
         }
-    }
 
-    .param {
-        &__title {
-            grid-column-start: 1;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 2;
-            align-self: end;
-        }
+        .param {
+            &__title {
+                grid-column-start: 1;
+                grid-column-end: 2;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                align-self: end;
+            }
 
-        &__input {
-            grid-column-start: 1;
-            grid-column-end: 3;
-            grid-row-start: 2;
-            grid-row-end: 3;
-        }
+            &__input {
+                grid-column-start: 1;
+                grid-column-end: 3;
+                grid-row-start: 2;
+                grid-row-end: 3;
+            }
 
-        &__default {
-            grid-column-start: 1;
-            grid-column-end: 3;
-            grid-row-start: 3;
-            grid-row-end: 4;
-            font-size: 0.8em;
-            margin-top: 4px;
+            &__default {
+                grid-column-start: 1;
+                grid-column-end: 3;
+                grid-row-start: 3;
+                grid-row-end: 4;
+                font-size: 0.8em;
+                margin-top: 4px;
 
-            &-item {
-                margin-right: 5px;
-                cursor: pointer;
+                &-item {
+                    margin-right: 5px;
+                    cursor: pointer;
 
-                &:last-child {
-                margin-right: 0;
-                }
+                    &:last-child {
+                    margin-right: 0;
+                    }
 
-                &.el-tag--info {
-                    transition:  all 0.3s ease-in-out;
-                    &:hover {
-                        background-color: #ecf5ff;
-                        border-color: #d9ecff;
-                        color: #409EFF;
+                    &.el-tag--info {
+                        transition:  all 0.3s ease-in-out;
+                        &:hover {
+                            background-color: #ecf5ff;
+                            border-color: #d9ecff;
+                            color: #409EFF;
+                        }
                     }
                 }
             }
-        }
 
-        &__warning {
-            grid-column-start: 2;
-            grid-column-end: 3;
-            grid-row-start: 1;
-            grid-row-end: 2;
-            justify-self: end;
-            align-self: end; 
+            &__warning {
+                grid-column-start: 2;
+                grid-column-end: 3;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                justify-self: end;
+                align-self: end; 
 
-            &--yellow {
-                color: #e6a23c;
-            }
+                &--yellow {
+                    color: #e6a23c;
+                }
 
-            &--red {
-                color: #ff0000;
+                &--red {
+                    color: #ff0000;
+                }
             }
         }
     }

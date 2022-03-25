@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="param__content param-content">
-                    <div class="param-item">
+                    <div class="num-input-item">
                         <el-input-number 
                             v-model="params.count" 
                             controls-position="right" 
@@ -18,7 +18,7 @@
                             size="small"
                             @change="handleCount">
                         </el-input-number>
-                        <span class="param-item__title">Ширина двери: {{doorWidth}} мм</span>
+                        <span class="num-input-item__title">Ширина двери: {{doorWidth}} мм</span>
                     </div>
                 </div>
             </div>
@@ -34,17 +34,17 @@
                 <div class="param__content param-content">
 
                     <div class="param-content__row" v-for="param in params.dels" :key="param.id">
-                        <div class="param-item">
+                        <div class="num-input-item">
                             <el-input-number 
                                 v-model="param.count" 
                                 controls-position="right" 
                                 :min="0" 
                                 :max="param.max" 
                                 size="small" 
-                                :class="{'param-item__input--selected': isDelAdded(param.id) }"
+                                :class="{'num-input-item__input--selected': isDelAdded(param.id) }"
                                 @change="handleDel(param.id)" >
                             </el-input-number>
-                            <span class="param-item__title" :class="{'param-item__title--selected': isDelAdded(param.id) }">{{param.title}}</span>
+                            <span class="num-input-item__title" :class="{'num-input-item__title--selected': isDelAdded(param.id) }">{{param.title}}</span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <span class="doors-kupe__error" v-show="isTooManyDoorsSelected"> <i class="el-icon-warning"></i> Выбрано больше дверей, чем нужно</span>
                 </div>
                 <div class="param__content param-content">
-                    <div class="param-item" v-for="item in params.material" :key="item.id">
+                    <div class="num-input-item" v-for="item in params.material" :key="item.id">
                         <el-input-number 
                             v-model="item.count" 
                             controls-position="right" 
@@ -68,9 +68,9 @@
                             :min="0" 
                             :max="doorsCount" 
                             size="small" 
-                            :class="{'param-item__input--selected': isMaterialSelected(item.id) }">
+                            :class="{'num-input-item__input--selected': isMaterialSelected(item.id) }">
                             </el-input-number>
-                        <span class="param-item__title" :class="{'param-item__title--selected': isMaterialSelected(item.id) }">{{item.name}}</span>
+                        <span class="num-input-item__title" :class="{'num-input-item__title--selected': isMaterialSelected(item.id) }">{{item.name}}</span>
                     </div>
                 </div>
             </div>
@@ -218,46 +218,28 @@ export default {
             border: 1px solid #f5dab1;
             border-radius: 4px;
         }
+
+        .param {
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+
+            &__header {
+                margin-bottom: 10px;
+                display: flex;
+            }
+
+            &__title {
+                font-size: 1.1em;
+                align-self: center;
+                margin-right: 10px;
+            }
+        }
     }
 </style>
 
 <style lang="scss">
-    .param {
-        margin-bottom: 20px;
-
-        &:last-child {
-            margin-bottom: 0px;
-        }
-
-        &__header {
-            margin-bottom: 10px;
-            display: flex;
-        }
-
-        &__title {
-            font-size: 1.1em;
-            align-self: center;
-            margin-right: 10px;
-        }
-
-        &-item {
-            margin-bottom: 5px;
-
-            &__input {
-                &--selected {
-                    input {
-                        color: red;
-                    }
-                }
-            }
-
-            &__title {
-                margin-left: 7px;
-
-                &--selected {
-                    color: red;
-                }
-            }
-        }
-    }
+    
 </style>

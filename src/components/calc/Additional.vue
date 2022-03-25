@@ -25,14 +25,14 @@
                         <el-checkbox v-model="additional.light.status" @change="handleLight()">Подсветка</el-checkbox>
                     </div>
 
-                    <div class="additional-item" v-for="item in additional.elements" :key="item.name">
+                    <div class="additional-item num-input-item" v-for="item in additional.elements" :key="item.name">
                         <el-input-number 
                             v-model="item.count" 
                             @change="handleElement(item.name)" 
                             :min="0" :max="item.max" size="small" controls-position="right" 
-                            :class="{'additional-item__input--selected': isElementSelected(item.name) }">
+                            :class="{'num-input-item__input--selected': isElementSelected(item.name) }">
                         </el-input-number>
-                        <span class="additional-item__title" :class="{'additional-item__title--selected': isElementSelected(item.name) }">
+                        <span class="num-input-item__title" :class="{'num-input-item__title--selected': isElementSelected(item.name) }">
                             {{item.title}}
                         </span>
                     </div>
@@ -221,22 +221,6 @@ export default {
     .additional {
         &-item {
             margin-bottom: 5px;
-
-            &__input {
-                &--selected {
-                    input {
-                        color: red;
-                    }
-                }
-            }
-
-            &__title {
-                margin-left: 7px;
-
-                &--selected {
-                    color: red;
-                }
-            }
         }
     }
 </style>

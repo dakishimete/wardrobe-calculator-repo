@@ -6,9 +6,9 @@
             <span class="doors-rasp__error" v-show="isTooManyDoorsSelected"> <i class="el-icon-warning"></i> Выбрано больше дверей, чем нужно</span>
         </div>
 
-        <div class="doors-rasp__material material">
+        <div class="doors-rasp__material" >
 
-            <div class="material-item" v-for="item in params.material" :key="item.id">
+            <div class="num-input-item" v-for="item in params.material" :key="item.id">
                 <el-input-number 
                     v-model="item.count" 
                     controls-position="right" 
@@ -16,11 +16,11 @@
                     :min="0" 
                     :max="doorsCount" 
                     size="small" 
-                    :class="{'material-item__input--selected': isMaterialSelected(item.id) }">
+                    :class="{'num-input-item__input--selected': isMaterialSelected(item.id) }">
                     </el-input-number>
                 <span 
-                    class="material__title" 
-                    :class="{'material-item__title--selected': isMaterialSelected(item.id) }">
+                    class="num-input-item__title" 
+                    :class="{'num-input-item__title--selected': isMaterialSelected(item.id) }">
                     {{item.name}}
                 </span>
             </div>
@@ -139,32 +139,10 @@ export default {
         &__count {
             margin-bottom: 10px;
         }
-
-        
     }
 
 </style>
 
 <style lang="scss">
-    .material {
-        &-item {
-            margin-bottom: 5px;
 
-            &__input {
-                &--selected {
-                    input {
-                        color: red;
-                    }
-                }
-            }
-
-            &__title {
-                margin-left: 7px;
-
-                &--selected {
-                    color: red;
-                }
-            }
-        }
-    }
 </style>

@@ -95,6 +95,28 @@ export default {
             justify-content: space-between;
         }
     }
+
+    
+    .num-input-item {
+        /* numeric inputs in doors components & additional component */
+        margin-bottom: 5px;
+
+        &__input {
+            &--selected {
+                input {
+                    color: red;
+                }
+            }
+        }
+
+        &__title {
+            margin-left: 7px;
+
+            &--selected {
+                color: red;
+            }
+        }
+    }
 </style>
 
 <style lang="scss">
@@ -147,19 +169,8 @@ export default {
         padding-right: 48px !important;
     }
 
-    
-        // .el-radio__input {
-        //     vertical-align: baseline;
-        // }
-
-        // .el-radio__label {
-        //     font-size: 16px;
-        // }
-
-
     .el-collapse, .el-collapse-item__wrap, .el-collapse-item__header{
         border: none !important;
-        // font-size: 16px;
     }
 
     .el-collapse-item__header{
