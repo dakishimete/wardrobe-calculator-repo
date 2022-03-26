@@ -19,6 +19,7 @@
                             @change="handleCount">
                         </el-input-number>
                         <span class="num-input-item__title">Ширина двери: {{doorWidth}} мм</span>
+                        <span class="doors-kupe__error" v-show="isDoorTooNarrow"> <i class="el-icon-warning"></i> Не рекомендуется делать дверь купе менее 500мм по ширине</span>
                     </div>
                 </div>
             </div>
@@ -115,6 +116,9 @@ export default {
         isTooManyDoorsSelected: function() {
             let total = this.params.material.reduce((prev,curItem) => prev + curItem.count, 0);
             return total > this.params.count;
+        },
+        isDoorTooNarrow: function() {
+            return this.doorWidth < 500;
         },
         isContentAllowedToView: function() {
             return this.GET_PARAM_INPUT('width') && this.GET_INNER_FULL_DATA;
@@ -217,6 +221,7 @@ export default {
             background-color: #fdf6ec;
             border: 1px solid #f5dab1;
             border-radius: 4px;
+            margin-left: 10px;
         }
 
         .param {
@@ -230,7 +235,6 @@ export default {
             &__title {
                 font-size: 1.1em;
                 align-self: center;
-                margin-right: 10px;
             }
         }
     }
