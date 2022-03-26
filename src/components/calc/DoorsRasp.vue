@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="doors-rasp">
 
         <div class="doors-rasp__count" >
-            В этой моели корпуса кол-во дверей: {{doorsCount}}
+            В этой модели корпуса кол-во дверей: {{doorsCount}}
             <span class="doors-rasp__error" v-show="isTooManyDoorsSelected"> <i class="el-icon-warning"></i> Выбрано больше дверей, чем нужно</span>
         </div>
 
