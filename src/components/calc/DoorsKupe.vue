@@ -222,10 +222,6 @@ export default {
         .param {
             margin-bottom: 20px;
 
-            &:last-child {
-                margin-bottom: 0px;
-            }
-
             &__header {
                 margin-bottom: 10px;
                 display: flex;
